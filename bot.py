@@ -1,8 +1,7 @@
 
 from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
-import asyncio
 
 TOKEN = os.getenv("BOT_TOKEN")
 
@@ -14,13 +13,9 @@ async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "📊 TEST SIGNAL\n\nBTCUSDT — LONG\nStrength: 8.2/10"
     )
 
-async def main():
-    app = Application.builder().token(TOKEN).build()
+app = ApplicationBuilder().token(TOKEN).build()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("scan", scan))
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("scan", scan))
 
-    await app.run_polling()
-
-if __name__ == "__main__":
-    asyncio.run(main())
+app.run_polling(close_loop=False)
