@@ -1,52 +1,33 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-import os
-import asyncio
+import os, asyncio
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from threading import Thread
 
 TOKEN = os.getenv("BOT_TOKEN")
+PORT = int(os.environ.get("PORT", 10000))
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"ALPHA BOT OK")
+
+def run_web():
+    server = HTTPServer(("0.0.0.0", PORT), Handler)
+    server.serve_forever()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🚀 ALPHA BOT ONLINE")
 
 async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "📊 TEST SIGNAL\n\nBTCUSDT — LONG\nStrength: 8.2/10"
-    )
+    await update.message.reply_text("📊 BTCUSDT — LONG\nStrength: 8.2/10")
 
-async def main():
-    app = ApplicationBuilder().token(TOKEN).build()
+Thread(target=run_web, daemon=True).start()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("scan", scan))
+app = ApplicationBuilder().token(TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("scan", scan))
 
-    print("🚀 ALPHA BOT STARTED")
-
-    await app.initialize()
-    await app.start()
-    await app.updater.start_polling()
-
-    while True:
-        await asyncio.sleep(3600)
-
-if __name__ == "__main__":
-    asyncio.run(main())
-    
-import os
-from flask import Flask
-import threading
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Bot is running"
-
-def run_web():
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
-
-threading.Thread(target=run_web).start()
-
-bot.polling()
-
+app.run_polling(close_loop=False)
 
