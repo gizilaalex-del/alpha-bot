@@ -42,3 +42,4 @@ async def help_command(update, context):
     """
     await update.message.reply_text(text)
 app.add_handler(CommandHandler("help", help_command))
+print("BOT FILE IS RUNNING")
