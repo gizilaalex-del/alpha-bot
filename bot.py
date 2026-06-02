@@ -40,3 +40,4 @@ async def help_command(update, context):
 ⏱ Таймфрейми: 1h / 4h / 1d
     """
     await update.message.reply_text(text)
+app.add_handler(CommandHandler("help", help_command))
