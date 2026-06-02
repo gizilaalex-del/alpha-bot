@@ -1,0 +1,11 @@
+async def start(update, context):
+    text = """
+🤖 Крипто-бот активний
+
+Доступні команди:
+/signal - отримати торгові сигнали
+/help - допомога
+
+📈 Аналізує BTC, ETH та інші 8 монет
+    """
+    await update.message.reply_text(text)
