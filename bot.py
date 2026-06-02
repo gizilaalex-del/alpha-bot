@@ -28,3 +28,15 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
+async def help_command(update, context):
+    text = """
+📊 Крипто бот команди:
+
+/start - запустити бота
+/signal - отримати сигнали
+/help - список команд
+
+🔥 Аналізує 10 монет
+⏱ Таймфрейми: 1h / 4h / 1d
+    """
+    await update.message.reply_text(text)
