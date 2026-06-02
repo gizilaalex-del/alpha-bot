@@ -44,3 +44,12 @@ def scan_market():
         results.append((coin, sig, conf))
 
     return results
+
+def scan_market():
+    results = []
+    for coin in COINS:
+        sig, conf = analyze_coin(coin)
+        results.append((coin, sig, conf))
+    return results
+
+    
