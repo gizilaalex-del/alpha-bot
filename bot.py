@@ -1,9 +1,8 @@
+import asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-import os
-import asyncio
 
-TOKEN = os.getenv("8851792706:AAEVK7MQWeM_jjDMIXQTSK8pWxc3cJU-q60")
+TOKEN = "8851792706:AAEVK7MQWeM_jjDMIXQTSK8pWxc3cJU-q60"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🚀 ALPHA BOT ONLINE")
@@ -16,6 +15,8 @@ async def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("scan", scan))
+
+    print("🚀 BOT STARTED")
 
     await app.initialize()
     await app.start()
