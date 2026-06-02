@@ -15,7 +15,8 @@ async def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("scan", scan))
-
+async def signal(update, context):
+    await update.message.reply_text("TEST SIGNAL WORKS")
     print("🚀 BOT STARTED")
 
     await app.initialize()
