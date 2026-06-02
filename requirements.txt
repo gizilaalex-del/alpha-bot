@@ -1,2 +1,10 @@
 python-telegram-bot==21.4
 requests==2.32.3
+ccxt
+pandas
+numpy
+ta
+xgboost
+scikit-learn
+joblib
+python-telegram-bot
