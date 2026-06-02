@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 import asyncio
 
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = os.getenv("8851792706:AAEVK7MQWeM_jjDMIXQTSK8pWxc3cJU-q60")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🚀 ALPHA BOT ONLINE")
